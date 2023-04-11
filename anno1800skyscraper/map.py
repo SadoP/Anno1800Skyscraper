@@ -8,13 +8,13 @@ from utils.figures import open_figure
 
 
 class Map:
-    def __init__(self):
-        self.l = 32
+    def __init__(self, width: int = 32):
+        self.width = width
         self.x_min: int = 0
         self.x_max: int = 0
-        self.y_min: int = self.l
-        self.y_max: int = self.l
-        self.coord_map: np.ndarray = np.chararray((self.l, self.l), itemsize=8)
+        self.y_min: int = self.width
+        self.y_max: int = self.width
+        self.coord_map: np.ndarray = np.chararray((self.width, self.width), itemsize=8)
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
 
@@ -51,16 +51,20 @@ class Map:
         print(f"Total inhabitants: {self.total_inhabitants}")
 
         fig, ax = open_figure()
-        ax.imshow(self.categorical_coords_map, cmap="tab20")
+        im = ax.imshow(self.categorical_coords_map)
+        # ax.imshow(self.categorical_coords_map, cmap="tab20")
+        fig.colorbar(im, ax=ax)
         fig.show()
 
     @property
     def categorical_coords_map(self):
         vals = np.unique(self.coord_map)
-        new_map = np.zeros((self.l, self.l), dtype=int)
+        new_map = np.zeros((self.width, self.width), dtype=int)
         i = 0
         for v in vals:
-            new_map[self.coord_map == v] = i
+            if v == "":
+                continue
+            new_map[self.coord_map == v] = self.house_by_hash(v.decode("utf-8")).level
             i += 1
         return new_map
 
@@ -68,22 +72,6 @@ class Map:
     def total_inhabitants(self):
         return sum([h.inhabitants for h in self.houses.values()])
 
-map = Map()
-houses = [
-    House(0, 0, 1, 1),
-    House(1, 2, 1, 1),
-    House(2, 0, 1, 1),
-    House(3, 2, 5, 1),
-    House(0, 7, 1, 1),
-    House(7, 0, 1, 1)
-]
-
-for h in houses:
-    map.add_house(h)
-
-
-for h1, h2 in itertools.product(map.houses.values(), map.houses.values()):
-    h1.adjacencyMap.add_adjacency(h2)
-
-map.print_housemap()
-
+    def create_adjacencies(self):
+        for h1, h2 in itertools.product(self.houses.values(), self.houses.values()):
+            h1.adjacencyMap.add_adjacency(h2)

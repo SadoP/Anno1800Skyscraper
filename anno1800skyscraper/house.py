@@ -60,20 +60,33 @@ class House:
     def level(self):
         return self._level
 
+    @property
+    def max_level(self):
+        return 3 if self.type.value == 0 else 5
+
+    @property
+    def min_level(self):
+        return 1
+
     @level.setter
     def level(self, value):
-        if value < 1 or value > 5 or not isinstance(value, int):
-            raise ValueError(f"Level has to be an integer between 1 and 5 but was {value}")
-        if self.type.value == 0 and value > 3:
-            raise ValueError(f"Engineer Skyscrapers must not be above level three")
+        if value < 1 or value > self.max_level or not isinstance(value, int):
+            raise ValueError(f"Level has to be an integer between {self.min_level} and "
+                             f"{self.max_level} but was {value}")
         self._level = value
+
+    def increment_level(self):
+        self.level = min(self.max_level, self.level+1)
+
+    def decrement_level(self):
+        self.level = max(self.min_level, self.level-1)
 
     @property
     def panorama(self):
-        level = self.level
+        panorama = self.level
         for house in self.adjacents.values():
-            level += self.compare_house_levels(self, house)
-        return np.clip(level, 0, 5)
+            panorama += self.compare_house_levels(self, house)
+        return np.clip(panorama, 0, 5)
 
     @property
     def adjacents(self) -> dict[str, House]:
@@ -84,11 +97,13 @@ class House:
 
     @staticmethod
     def compare_house_levels(own: House, other: House) -> int:
+        if own.level == other.level:
+            if own.type == other.type:
+                return -1
+            return 1
         if own.level < other.level:
             return -1
         if own.level > other.level:
-            return 1
-        if own.type != other.type:
             return 1
         return 0
 
@@ -114,11 +129,11 @@ class House:
 
     @property
     def __eng_inhabitants(self):
-        return 60+self.level*20+self.panorama*20
+        return 60+(self.level-1)*20+self.panorama*20
 
     @property
     def __inv_inhabitants(self):
-        return 75+self.level*25+self.panorama*25
+        return 75+(self.level-1)*25+self.panorama*25
 
     def __repr__(self):
         return f"Level {self.level} {self.type.name} residence {self.id} at location ({self.x}," \
