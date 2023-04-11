@@ -42,10 +42,10 @@ class AdjacencyMap:
 
 class House:
     def __init__(self, x: int, y: int, level: int, type: int):
-        if x < 0 or y < 0 or not isinstance(x, int) or not isinstance(y, int):
+        if x < 0 or y < 0 or not isinstance(x, (int, np.integer)) or not isinstance(y, (int, np.integer)):
             raise ValueError(f"X and Y coordinates have to be given as positive integers but were"
                              f"{x} and {y}."
-                             "The Coordinate refers to their top left corner.")
+                             "The Coordinate refers to their lower left corner.")
         self.x: int = x
         self.y: int = y
         self.type: HousingOptions = HousingOptions(type)
@@ -70,7 +70,7 @@ class House:
 
     @level.setter
     def level(self, value):
-        if value < 1 or value > self.max_level or not isinstance(value, int):
+        if value < 1 or value > self.max_level or not isinstance(value, (int, np.integer)):
             raise ValueError(f"Level has to be an integer between {self.min_level} and "
                              f"{self.max_level} but was {value}")
         self._level = value
