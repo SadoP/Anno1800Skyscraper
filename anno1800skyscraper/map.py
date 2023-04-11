@@ -49,20 +49,21 @@ class Map:
         self.coord_map[house.x:house.x + 2, house.y:house.y + 2] = house.id
         self.houses[house.id] = house
 
-    def print_housemap(self) -> (plt.Figure, plt.Axes):
-        for house in self.houses.values():
-            print(house)
+    def print_housemap(self, verbose=False, **kwargs) -> (plt.Figure, plt.Axes):
+        if verbose:
+            for house in self.houses.values():
+                print(house)
         print(f"Total inhabitants: {self.total_inhabitants}")
 
         bounds = [a-0.5 for a in [0, 1, 2, 3, 4, 5, 6]]
         cmap = matplotlib.colormaps["Set1"]
         norm = colors.BoundaryNorm(bounds, cmap.N)
 
-        fig, ax = open_figure()
+        fig, ax = open_figure(**kwargs)
         im = ax.imshow(self.categorical_coords_map, origin='lower', cmap=cmap, norm=norm,
                        extent=[0, self.width, 0, self.width])
         fig.colorbar(im, ax=ax, cmap=cmap, norm=norm, boundaries=bounds,
-                     ticks=[b + 0.5 for b in bounds])
+                     ticks=[b + 0.5 for b in bounds], label="Skyscraper Level")
         ax.set_xlim(0, self.width)
         ax.set_ylim(0, self.width)
         fig.show()
