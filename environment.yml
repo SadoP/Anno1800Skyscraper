@@ -1,0 +1,4 @@
+name: Anno1800Skyscraper
+dependencies:
+  - python=3.10.*
+  - pip
