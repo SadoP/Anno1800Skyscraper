@@ -8,10 +8,10 @@ Randomly applying mutations to an initial distribution of skyscraper levels will
 Only keeping the mutations that create an improvement will eventually converge to a solution that is close to the best possible solution.
 
 ## Example
-Starting Layout
-![Start Layout](./layouts/2x2/2x2_in.png)
-Layout after Optimizing
-![Optimized Layout](./layouts/2x2/2x2_out.png)
+Starting Layout with randomly initialized house levels
+![Start Layout](./layouts/3x3/3x3_in.png)
+Layout after optimizing
+![Optimized Layout](./layouts/3x3/3x3_out.png)
 
 
 ## Set up the environment
