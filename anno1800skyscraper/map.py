@@ -11,13 +11,10 @@ from utils.figures import open_figure
 
 
 class Map:
-    def __init__(self, width: int = 32):
+    def __init__(self, width: int = 32, height: int = 32):
         self.width = width
-        self.x_min: int = 0
-        self.x_max: int = 0
-        self.y_min: int = self.width
-        self.y_max: int = self.width
-        self.coord_map: np.ndarray = np.chararray((self.width, self.width), itemsize=8)
+        self.height = height
+        self.coord_map: np.ndarray = np.chararray((self.width, self.height), itemsize=8)
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
 
@@ -29,7 +26,7 @@ class Map:
         return house.id in self.house_hashes
 
     def house_by_coords(self, x, y):
-        coords = self.coord_map[x:x + 2, y:y + 2].flatten()
+        coords = self.coord_map[x:x + 3, y:y + 3].flatten()
         hashes = np.unique(coords)
         if len(hashes) != 1:
             raise ValueError(f"Coordinates ({x}, {y}) not of unique house")
@@ -41,13 +38,13 @@ class Map:
         return self.houses.get(hash)
 
     def add_house(self, house: House) -> None:
-        if house.x + 2 > self.width or house.y + 2 > self.width:
+        if house.x + 3 > self.width or house.y + 3 > self.width:
             raise ValueError("House placement outside of map borders")
         if self.house_exists(house):
             raise ValueError("House already exists")
         if self.house_by_coords(house.x, house.y) != 0:
             raise ValueError("Placement for house occupied")
-        self.coord_map[house.x:house.x + 2, house.y:house.y + 2] = house.id
+        self.coord_map[house.x:house.x + 3, house.y:house.y + 3] = house.id
         self.houses[house.id] = house
 
     def print_housemap(self, verbose=False, print_labels=False, **kwargs) -> (plt.Figure, plt.Axes):
@@ -65,7 +62,7 @@ class Map:
         fig, ax = open_figure(**kwargs)
         cat_map = self.categorical_coords_map
         im = ax.imshow((cat_map[:, :, 0] * cat_map[:, :, 1]).T, origin='lower', cmap=cmap,
-                       norm=norm, extent=[0, self.width, 0, self.width])
+                       norm=norm, extent=[0, self.width, 0, self.height])
         cbar = fig.colorbar(im, ax=ax, cmap=cmap, norm=norm, boundaries=bounds,
                             ticks=[b + 0.5 for b in bounds], label="Skyscraper Level")
         ticklabels = cbar.ax.get_ymajorticklabels()
@@ -83,19 +80,19 @@ class Map:
             newTicklabels.append(tl)
         cbar.ax.set_yticklabels(newTicklabels)
         ax.set_xlim(0, self.width)
-        ax.set_ylim(0, self.width)
+        ax.set_ylim(0, self.height)
         ax.set_title(f"Total inhabitants: {self.total_inhabitants}")
         for house in self.houses.values():
             if print_labels:
                 ax.text(
-                    x=house.x+1,
-                    y=house.y+1,
+                    x=house.x+1.5,
+                    y=house.y+1.5,
                     s=("I" if house.type.value else "E") + str(house.level),
                     horizontalalignment="center",
                     verticalalignment="center"
                 )
             ax.add_patch(
-                Rectangle((house.x, house.y), 2, 2, edgecolor="black", fill=False, lw=1)
+                Rectangle((house.x, house.y), 3, 3, edgecolor="black", fill=False, lw=1)
             )
         fig.show()
         return fig, ax
@@ -156,7 +153,7 @@ class Map:
     @property
     def categorical_coords_map(self):
         vals = np.unique(self.coord_map)
-        new_map = np.zeros((self.width, self.width, 2), dtype=int)
+        new_map = np.zeros((self.width, self.height, 2), dtype=int)
         i = 0
         for v in vals:
             if v == "":

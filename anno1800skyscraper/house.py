@@ -129,11 +129,13 @@ class House:
 
     @property
     def __eng_inhabitants(self):
-        return 60+(self.level-1)*20+self.panorama*20
+        # Engineers have different values, but I don't have those yet, so I'll use Investor's for
+        # the moment
+        return [197, 239, 283][self.level-1] + [0, 80, 139, 193, 253, 319][self.panorama]
 
     @property
     def __inv_inhabitants(self):
-        return 75+(self.level-1)*25+self.panorama*25
+        return [197, 239, 283, 331, 381][self.level-1] + [0, 80, 139, 193, 253, 319][self.panorama]
 
     def __repr__(self):
         return f"Level {self.level} {self.type.name} residence {self.id} at location ({self.x}," \

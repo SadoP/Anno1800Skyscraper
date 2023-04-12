@@ -1,13 +1,15 @@
 import argparse
 import copy
+import json
 from pathlib import Path
 import sys
 
 from tqdm import trange
 import numpy as np
 
+from anno1800skyscraper.house import House
 from utils.figures import save_figure, print_progression
-from utils.map import read_map_from_csv, write_map_to_csv
+from utils.map import read_map_from_csv, write_map_to_csv, read_map_from_anno_designer
 
 sys.setrecursionlimit(10000)
 parser = argparse.ArgumentParser(
@@ -18,19 +20,33 @@ parser = argparse.ArgumentParser(
 parser.add_argument("-d", "--dir", default="./layouts/example")
 parser.add_argument("-e", "--epochs", default=10000, type=int)
 parser.add_argument("-c", "--change", default=".05")
+parser.add_argument("-f", "--filetype", default=".ad", type=str)
+parser.add_argument("--mode")
+parser.add_argument("--host")
+parser.add_argument("--port")
 args = parser.parse_args()
 
+filetype = args.filetype
+if filetype not in [".ad", ".csv"]:
+    raise ValueError("Filetype has to be .ad or .csv")
 change = args.change
 change = int(change) if change.isdigit() else float(change)
 folder = Path(args.dir)
+folder = Path("./layouts/designer")
 epochs = args.epochs
 try:
-    in_file = next(folder.glob("*_in.csv"))
+    in_file = next(folder.glob(f"*{filetype}"))
 except StopIteration:
     raise ValueError(f"Input File in {folder} not found")
-out_file = folder / in_file.name.replace("_in", "_out")
+if in_file.name.__contains__("_in"):
+    out_file = folder / in_file.name.replace("_in", "_out")
+else:
+    out_file = folder / (in_file.stem + "_out.csv")
 
-map = read_map_from_csv(in_file)
+if filetype == ".csv":
+    map = read_map_from_csv(in_file)
+else:
+    map = read_map_from_anno_designer(in_file)
 
 if isinstance(change, int) and change > 0:
     n_change = max(change, 1)
@@ -60,11 +76,10 @@ if not out_file.exists():
         pops.append(tot)
         epoch_range.set_postfix({"Total": str(tot)})
 
-
     write_map_to_csv(map, out_file)
     fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
     save_figure(fig, folder / out_file.name.split('.')[0],
-                size=(max(map.width*2/3, 15), max(map.width*2/3, 15)), formats=["png"])
+                size=(max(map.width*2/3, 15), max(map.height*2/3, 15)), formats=["png"])
 
     fig, ax = print_progression(pops, tight_layout=True)
     save_figure(fig, folder / out_file.name.replace("_out.csv", "_prog"), size=(10, 10),
@@ -73,4 +88,4 @@ else:
     map = read_map_from_csv(out_file)
     fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
     save_figure(fig, folder / out_file.name.split('.')[0],
-                size=(max(map.width*2/3, 15), max(map.width*2/3, 15)), formats=["png"])
+                size=(max(map.width*2/3, 15), max(map.height*2/3, 15)), formats=["png"])
