@@ -7,9 +7,10 @@ from anno1800skyscraper.house import House
 from anno1800skyscraper.map import Map
 
 
-def read_map_from_csv(filename: str | Path | PosixPath, width: int = 34):
-    map = Map(width=width)
+def read_map_from_csv(filename: str | Path | PosixPath):
     data = pd.read_csv(filename, delimiter=",")
+    width = data.loc[:, ["loc_x", "loc_y"]].values.max()+2
+    map = Map(width=width)
     for _, row in data.iterrows():
         x = row["loc_x"]
         y = row["loc_y"]

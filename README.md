@@ -31,9 +31,8 @@ Layout after Optimizing
  - Run the program with the following parameters:
    - dir: The directory your csv file is in
    - epochs: The number of epochs to run the program for. More houses need a higher number
-   - change: The amount of houses to flip. Can be int for absolute values of float for relative values. Low numbers work better
-   - width: The width of the map to generate. This acts as a canvas for your layout and figures
+   - change: The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
  
-```bash
- python main.py -d layouts/example -e 10000 -c 7 -w 10
-```
+   ```bash
+    python main.py -d layouts/example -e 10000 -c .05 -w 10
+   ```

@@ -1,6 +1,7 @@
 import os
-
+from typing import List
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def open_figure(my_dpi=96, size=800, **kwargs) -> (plt.Figure, plt.Axes):
@@ -41,3 +42,15 @@ def save_figure(fig: plt.figure, filename, size: tuple = (30, 30), dpi=600, **kw
     fig.savefig(filename + ".svg", dpi=dpi, **kwargs)
     fig.savefig(filename + ".png", dpi=dpi, **kwargs)
     fig.savefig(filename + ".pdf", dpi=dpi, **kwargs)
+
+
+def print_progression(pops: List[int], **kwargs) -> (plt.Figure, plt.Axes):
+    fig, ax = open_figure(**kwargs)
+    ax.plot(np.arange(0, len(pops)), pops)
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Total Population")
+    ax.set_xlim(0, len(pops) - 1)
+    ax.set_ylim(0, max(pops)*1.1)
+    ax.grid()
+    fig.show()
+    return fig, ax
