@@ -18,9 +18,6 @@ parser = argparse.ArgumentParser(
 parser.add_argument("-d", "--dir", default="./layouts/example")
 parser.add_argument("-e", "--epochs", default=10000, type=int)
 parser.add_argument("-c", "--change", default=".1")
-parser.add_argument("--mode")
-parser.add_argument("--host")
-parser.add_argument("--port")
 args = parser.parse_args()
 
 change = args.change
