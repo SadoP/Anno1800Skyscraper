@@ -35,5 +35,5 @@ Layout after optimizing
    - change: The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
  
    ```bash
-    python main.py -d layouts/example -e 10000 -c .05 -w 10
+    python main.py -d layouts/example -e 10000 -c .05
    ```
