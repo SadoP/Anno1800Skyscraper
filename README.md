@@ -25,15 +25,16 @@ Layout after optimizing
     poetry install
     poetry self update
 ```
-
+If you have problems installing poetry, follow the installation instructions here:
+[https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation)
 ## Usage
  - Create a folder in "layouts" that contains a file that matches the pattern "*_in.csv", e.g. "mylayout_in.csv".
  - Populate the csv like "./example/example_in.csv". The first two columns contain the x- and y-coordinate of the house, the third column the level to start with (1-3 for engineers, 1-5 for investors or "random" for random seeding), the fourth column contains the type of skyscraper (0 for engineers, 1 for investors)
  - Run the program with the following parameters:
-   - dir: The directory your csv file is in
-   - epochs: The number of epochs to run the program for. More houses need a higher number
-   - change: The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
+   - dir (d): The directory your csv file is in
+   - epochs (e): The number of epochs to run the program for. More houses need a higher number
+   - change (c): The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
  
    ```bash
-    python main.py -d layouts/example -e 10000 -c .05 -w 10
+    python main.py -d layouts/example -e 10000 -c .05
    ```
