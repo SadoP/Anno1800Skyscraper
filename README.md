@@ -7,11 +7,12 @@ A solution based around trying all possible solutions [has been tried](https://g
 Randomly applying mutations to an initial distribution of skyscraper levels will increase or decrease the total population of the layout.
 Only keeping the mutations that create an improvement will eventually converge to a solution that is close to the best possible solution.
 
-## Example
-Starting Layout with randomly initialized house levels
-![Start Layout](./layouts/3x3/3x3_in.png)
-Layout after optimizing
-![Optimized Layout](./layouts/3x3/3x3_out.png)
+## Example 
+Starting Layout with randomly initialized house levels  
+<img src="./layouts/3x3/3x3_in.png" alt="Start Layout" style="max-width: 512px">
+
+Layout after optimizing  
+<img src="./layouts/3x3/3x3_out.png" alt="Optimized Layout" style="max-width: 512px">
 
 
 ## Set up the environment
