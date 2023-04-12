@@ -129,9 +129,7 @@ class House:
 
     @property
     def __eng_inhabitants(self):
-        # Engineers have different values, but I don't have those yet, so I'll use Investor's for
-        # the moment
-        return [197, 239, 283][self.level-1] + [0, 80, 139, 193, 253, 319][self.panorama]
+        return [136, 171, 196][self.level-1] + [0, 50, 39, 40, 39, 41][self.panorama]
 
     @property
     def __inv_inhabitants(self):
