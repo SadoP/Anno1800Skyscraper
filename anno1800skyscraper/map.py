@@ -55,29 +55,48 @@ class Map:
                 print(house)
         print(f"Total inhabitants: {self.total_inhabitants}")
 
-        bounds = [a-0.5 for a in [0, 1, 2, 3, 4, 5, 6]]
+        bounds = [a-0.5 for a in [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6]]
         cmap = matplotlib.colormaps["Set1"]
         norm = colors.BoundaryNorm(bounds, cmap.N)
 
         fig, ax = open_figure(**kwargs)
-        im = ax.imshow(self.categorical_coords_map, origin='lower', cmap=cmap, norm=norm,
+        cat_map = self.categorical_coords_map
+        im = ax.imshow(cat_map[:, :, 0] * cat_map[:, :, 1], origin='lower', cmap=cmap, norm=norm,
                        extent=[0, self.width, 0, self.width])
-        fig.colorbar(im, ax=ax, cmap=cmap, norm=norm, boundaries=bounds,
-                     ticks=[b + 0.5 for b in bounds], label="Skyscraper Level")
+        cbar = fig.colorbar(im, ax=ax, cmap=cmap, norm=norm, boundaries=bounds,
+                            ticks=[b + 0.5 for b in bounds], label="Skyscraper Level")
+        ticklabels = cbar.ax.get_ymajorticklabels()
+        newTicklabels = []
+        for ticklabel in ticklabels:
+            tl = ticklabel
+            text = tl._text.replace(u"\u2212", "-")
+            if text[0] == "-":
+                text = text.replace("-", "Engineer Level ")
+            elif text == "0":
+                text = "empty"
+            else:
+                text = "Investor Level " + text
+            tl._text = text
+            newTicklabels.append(tl)
+        cbar.ax.set_yticklabels(newTicklabels)
         ax.set_xlim(0, self.width)
         ax.set_ylim(0, self.width)
+        ax.set_title(f"Total inhabitants: {self.total_inhabitants}")
         fig.show()
         return fig, ax
 
     @property
     def categorical_coords_map(self):
         vals = np.unique(self.coord_map)
-        new_map = np.zeros((self.width, self.width), dtype=int)
+        new_map = np.zeros((self.width, self.width, 2), dtype=int)
         i = 0
         for v in vals:
             if v == "":
                 continue
-            new_map[self.coord_map == v] = self.house_by_hash(v.decode("utf-8")).level
+            new_map[self.coord_map == v, :] = [
+                1 if self.house_by_hash(v.decode("utf-8")).type.value else -1,
+                self.house_by_hash(v.decode("utf-8")).level
+            ]
             i += 1
         return new_map
 
