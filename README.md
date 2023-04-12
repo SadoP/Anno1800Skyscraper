@@ -7,6 +7,12 @@ A solution based around trying all possible solutions [has been tried](https://g
 Randomly applying mutations to an initial distribution of skyscraper levels will increase or decrease the total population of the layout.
 Only keeping the mutations that create an improvement will eventually converge to a solution that is close to the best possible solution.
 
+## Example
+Starting Layout
+![Start Layout](./layouts/2x2/2x2_in.png)
+Layout after Optimizing
+![Optimized Layout](./layouts/2x2/2x2_out.png)
+
 
 ## Set up the environment
  - Have [Conda](https://docs.conda.io/en/latest/miniconda.html) installed according to the official instructions
