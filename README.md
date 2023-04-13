@@ -9,16 +9,20 @@ Only keeping the mutations that create an improvement will eventually converge t
 
 ## Example 
 Starting Layout for 3x3 grid of Level 1 Investor Skyscrapers  
-![Start Layout](layouts/3x3_IN/3x3_IN.png)
+![Start Layout](layouts/3x3_IN/3x3_IN_houses.png)
+![Start Layout](layouts/3x3_IN/3x3_IN_pan.png)
 
 Layout after optimizing  
-![Optimized Layout](layouts/3x3_IN/3x3_IN_out.png)
+![Optimized Layout](layouts/3x3_IN/3x3_IN_out_houses.png)
+![Optimized Layout](layouts/3x3_IN/3x3_IN_out_pan.png)
 
 A layout with room for Buildings in the Middle  
-![Start Layout](layouts/realistic/realistic_mixed.png)
+![Start Layout](layouts/realistic/realistic_mixed_houses.png)
+![Start Layout](layouts/realistic/realistic_mixed_pan.png)
 
 Layout after optimizing  
-![Optimized Layout](layouts/realistic/realistic_mixed_out.png)
+![Optimized Layout](layouts/realistic/realistic_mixed_out_houses.png)
+![Optimized Layout](layouts/realistic/realistic_mixed_out_pan.png)
 
 
 ## Set up the environment
