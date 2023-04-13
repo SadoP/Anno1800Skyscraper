@@ -1,10 +1,16 @@
+from __future__ import annotations
+
+import copy
 import itertools
+import json
+from pathlib import Path, PosixPath
 from typing import List
 
 import matplotlib
 import numpy as np
 from matplotlib import colors, pyplot as plt
 from matplotlib.patches import Rectangle
+from tqdm import trange
 
 from anno1800skyscraper.house import House
 from utils.figures import open_figure
@@ -17,6 +23,8 @@ class Map:
         self.coord_map: np.ndarray = np.chararray((self.width, self.height), itemsize=8)
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
+        self.ad_file: str
+        self.file_contents: dict
 
     @property
     def house_hashes(self) -> List[str]:
@@ -46,6 +54,24 @@ class Map:
             raise ValueError("Placement for house occupied")
         self.coord_map[house.x:house.x + 3, house.y:house.y + 3] = house.id
         self.houses[house.id] = house
+
+    @staticmethod
+    def optimize(map, epochs: int, n_change: int) -> (Map, List[int]):
+        epoch_range = trange(epochs, unit="epoch")
+        pops = [map.total_inhabitants]
+        for _ in epoch_range:
+            map_new = copy.deepcopy(map)
+            house_keys = np.random.choice(list(map_new.houses.keys()), n_change)
+            for key in house_keys:
+                map_new.house_by_hash(key).increment_level() if np.random.random() < .5 else \
+                    map_new.house_by_hash(key).decrement_level()
+
+            if map_new.total_inhabitants >= map.total_inhabitants:
+                map = map_new
+            tot = map.total_inhabitants
+            pops.append(tot)
+            epoch_range.set_postfix({"Total": str(tot)})
+        return map, pops
 
     def print_housemap(self, verbose=False, print_labels=False, **kwargs) -> (plt.Figure, plt.Axes):
         if verbose:
@@ -172,3 +198,31 @@ class Map:
     def create_adjacencies(self):
         for h1, h2 in itertools.product(self.houses.values(), self.houses.values()):
             h1.adjacencyMap.add_adjacency(h2)
+
+    @staticmethod
+    def load_from_ad(filename: str | Path | PosixPath) -> Map:
+        with open(filename) as f:
+            data: dict = json.load(f)
+            houses = []
+            for object in data.get("Objects"):
+                idf = object.get("Identifier")
+                if not idf.lower().__contains__("skyscraper"):
+                    continue
+                loc_x, loc_y = [int(i) for i in object.get("Position").split(",")]
+                type = 0 if int(idf.split("_SkyScraper_")[1][0]) == 4 else 1
+                level = int(idf.split("_SkyScraper_")[1][-1])
+                house = House(x=loc_x, y=loc_y, level=level, type=type)
+                houses.append(house)
+            width = max([h.x for h in houses]) + 3
+            height = max([h.y for h in houses]) + 3
+            map = Map(width=width, height=height)
+            for house in houses:
+                map.add_house(house)
+            map.create_adjacencies()
+            map.ad_file = filename
+            map.file_contents = data
+            return map
+
+    @staticmethod
+    def save_to_ad(file):
+        pass

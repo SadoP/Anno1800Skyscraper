@@ -1,16 +1,8 @@
 import argparse
-import copy
-import json
 from pathlib import Path
 import sys
-
-from tqdm import trange
-import numpy as np
-
-from anno1800skyscraper.house import House
+from anno1800skyscraper.map import Map
 from utils.figures import save_figure, print_progression
-from utils.map import read_map_from_csv, write_map_to_csv, read_map_from_anno_designer
-
 sys.setrecursionlimit(10000)
 parser = argparse.ArgumentParser(
                     prog="Anno1800SkyscraperOptimizer",
@@ -43,10 +35,7 @@ if in_file.name.__contains__("_in"):
 else:
     out_file = folder / (in_file.stem + "_out.csv")
 
-if filetype == ".csv":
-    map = read_map_from_csv(in_file)
-else:
-    map = read_map_from_anno_designer(in_file)
+map: Map = Map.load_from_ad(in_file)
 
 if isinstance(change, int) and change > 0:
     n_change = max(change, 1)
@@ -61,22 +50,8 @@ save_figure(fig, folder / in_file.name.split('.')[0],
             size=(max(map.width*2/3, 15), max(map.width*2/3, 15)),
             formats=["png"])
 if not out_file.exists():
-    epoch_range = trange(epochs, unit="epoch")
-    pops = [map.total_inhabitants]
-    for e in epoch_range:
-        map_new = copy.deepcopy(map)
-        house_keys = np.random.choice(list(map_new.houses.keys()), n_change)
-        for key in house_keys:
-            map_new.house_by_hash(key).increment_level() if np.random.random() < .5 else \
-                map_new.house_by_hash(key).decrement_level()
-
-        if map_new.total_inhabitants >= map.total_inhabitants:
-            map = map_new
-        tot = map.total_inhabitants
-        pops.append(tot)
-        epoch_range.set_postfix({"Total": str(tot)})
-
-    write_map_to_csv(map, out_file)
+    map, pops = map.optimize(epochs, n_change)
+    map.save_to_ad(out_file)
     fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
     save_figure(fig, folder / out_file.name.split('.')[0],
                 size=(max(map.width*2/3, 15), max(map.height*2/3, 15)), formats=["png"])
@@ -85,7 +60,7 @@ if not out_file.exists():
     save_figure(fig, folder / out_file.name.replace("_out.csv", "_prog"), size=(10, 10),
                 formats=["png"])
 else:
-    map = read_map_from_csv(out_file)
+    map = Map.load_from_ad(out_file)
     fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
     save_figure(fig, folder / out_file.name.split('.')[0],
                 size=(max(map.width*2/3, 15), max(map.height*2/3, 15)), formats=["png"])
