@@ -204,12 +204,12 @@ class Map:
         with open(filename, "r") as f:
             data: dict = json.load(f)
             houses = []
-            for object in data.get("Objects"):
-                idf = object.get("Identifier")
-                if not idf in [e.name for e in InvestorSkyscraper] + \
-                       [e.name for e in EngineerSkyscraper]:
+            for obj in data.get("Objects"):
+                idf = obj.get("Identifier")
+                if not idf in [e.name for e in InvestorSkyscraper] + [e.name for e in
+                                                                      EngineerSkyscraper]:
                     continue
-                loc_x, loc_y = [int(i) for i in object.get("Position").split(",")]
+                loc_x, loc_y = [int(i) for i in obj.get("Position").split(",")]
                 type = 0 if int(idf.split("_SkyScraper_")[1][0]) == 4 else 1
                 level = int(idf.split("_SkyScraper_")[1][-1])
                 house = House(x=loc_x, y=loc_y, level=level, type=type)
@@ -225,13 +225,13 @@ class Map:
             return map
 
     def save_to_ad(self, filename: str | Path | PosixPath):
-        for object in self.file_contents.get("Objects"):
-            idf = object.get("Identifier")
-            if not idf in [e.name for e in InvestorSkyscraper] + \
-                   [e.name for e in EngineerSkyscraper]:
+        for obj in self.file_contents.get("Objects"):
+            idf = obj.get("Identifier")
+            if not idf in [e.name for e in InvestorSkyscraper] + [e.name for e in
+                                                                  EngineerSkyscraper]:
                 continue
-            loc_x, loc_y = [int(i) for i in object.get("Position").split(",")]
+            loc_x, loc_y = [int(i) for i in obj.get("Position").split(",")]
             house = self.house_by_coords(loc_x, loc_y)
-            object["Identifier"] = house.annoDesignerIdentifier.name
+            obj["Identifier"] = house.annoDesignerIdentifier.name
         with open(filename, "w") as file:
             json.dump(self.file_contents, file)
