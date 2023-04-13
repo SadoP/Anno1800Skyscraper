@@ -8,11 +8,17 @@ Randomly applying mutations to an initial distribution of skyscraper levels will
 Only keeping the mutations that create an improvement will eventually converge to a solution that is close to the best possible solution.
 
 ## Example 
-Starting Layout with randomly initialized house levels  
-<img src="./layouts/3x3/3x3_in.png" alt="Start Layout" style="max-width: 512px">
+Starting Layout for 3x3 grid of Level 1 Investor Skyscrapers  
+![Start Layout](layouts/3x3_IN/3x3_IN.png)
 
 Layout after optimizing  
-<img src="./layouts/3x3/3x3_out.png" alt="Optimized Layout" style="max-width: 512px">
+![Optimized Layout](layouts/3x3_IN/3x3_IN_out.png)
+
+A layout with room for Buildings in the Middle  
+![Start Layout](layouts/realistic/realistic_mixed.png)
+
+Layout after optimizing  
+![Optimized Layout](layouts/realistic/realistic_mixed_out.png)
 
 
 ## Set up the environment
@@ -28,7 +34,7 @@ Layout after optimizing
 If you have problems installing poetry, follow the installation instructions here:
 [https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation)
 ## Usage
- - Create a Design or in [Anno Designer](https://github.com/AnnoDesigner/anno-designer) or use [Anno 1800 Savegame Visualizer](https://github.com/NiHoel/Anno1800SavegameVisualizer) to import your stamps or savegames into Anno Designer.
+ - Create a Design in [Anno Designer](https://github.com/AnnoDesigner/anno-designer) or use [Anno 1800 Savegame Visualizer](https://github.com/NiHoel/Anno1800SavegameVisualizer) to import your stamps or savegames into Anno Designer.
  - Save your design as a .ad-file in a separate folder in this project. I'll be using "./layouts/realistic" as an example here. If you want to run the tool multiple times, every layout needs their own directory.
  - Run the program with the following parameters:
    - dir (d): The directory your ad file is in
@@ -36,5 +42,5 @@ If you have problems installing poetry, follow the installation instructions her
    - change (c): The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
  
    ```bash
-    python main.py -d layouts/realistic -e 10000 -c .05
+    python python main.py -d ./layouts/realistic -e 20000 -c .05
    ```
