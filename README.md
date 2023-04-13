@@ -28,21 +28,13 @@ Layout after optimizing
 If you have problems installing poetry, follow the installation instructions here:
 [https://python-poetry.org/docs/#installation](https://python-poetry.org/docs/#installation)
 ## Usage
- - Create a folder in "layouts" that contains a file that matches the pattern "*_in.csv", e.g. "mylayout_in.csv".
- - Populate the csv like "./example/example_in.csv". The first two columns contain the x- and y-coordinate of the house, the third column the level to start with (1-3 for engineers, 1-5 for investors or "random" for random seeding), the fourth column contains the type of skyscraper (0 for engineers, 1 for investors) or see below for compatibility with Anno Designer.
+ - Create a Design or in [Anno Designer](https://github.com/AnnoDesigner/anno-designer) or use [Anno 1800 Savegame Visualizer](https://github.com/NiHoel/Anno1800SavegameVisualizer) to import your stamps or savegames into Anno Designer.
+ - Save your design as a .ad-file in a separate folder in this project. I'll be using "./layouts/realistic" as an example here. If you want to run the tool multiple times, every layout needs their own directory.
  - Run the program with the following parameters:
-   - dir (d): The directory your csv file is in
+   - dir (d): The directory your ad file is in
    - epochs (e): The number of epochs to run the program for. More houses need a higher number
    - change (c): The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
-   - filetype (f): .csv or .ad for different input types
  
    ```bash
-    python main.py -d layouts/example -e 10000 -c .05 -f .csv
-   ```
-
-## Compatibility with Anno Designer
-You can also use [Anno Designer](https://github.com/AnnoDesigner/anno-designer) to create an *.ad-file to import or use [Anno 1800 Savegame Visualizer](https://github.com/NiHoel/Anno1800SavegameVisualizer) to create an *.ad-file from one of your saves.
-Same as above, create a folder to hold your design, then run like this:
-   ```bash
-    python main.py -d layouts/designer -e 10000 -c .05 -f .ad
+    python main.py -d layouts/realistic -e 10000 -c .05
    ```
