@@ -13,13 +13,13 @@ from matplotlib.patches import Rectangle
 from tqdm import trange
 
 from anno1800skyscraper.house import House, InvestorSkyscraper, EngineerSkyscraper
-from utils.figures import open_figure
+from utils.figures import open_figure, save_figure
 
 
 class Map:
     def __init__(self, width: int = 32, height: int = 32):
-        self.width = width
-        self.height = height
+        self.width = width + 2
+        self.height = height + 2
         self.coord_map: np.ndarray = np.chararray((self.width, self.height), itemsize=8)
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
@@ -73,7 +73,9 @@ class Map:
             epoch_range.set_postfix({"Total": str(tot)})
         return map, pops
 
-    def print_housemap(self, verbose=False, print_labels=False, **kwargs) -> (plt.Figure, plt.Axes):
+    def print_housemap(self, verbose=False, print_labels=False,
+                       filename: str | Path | PosixPath = None, **kwargs) -> (
+            plt.Figure, plt.Axes):
         if verbose:
             for house in self.houses.values():
                 print(house)
@@ -107,6 +109,7 @@ class Map:
         cbar.ax.set_yticklabels(newTicklabels)
         ax.set_xlim(0, self.width)
         ax.set_ylim(0, self.height)
+        ax.invert_yaxis()
         ax.set_title(f"Total inhabitants: {self.total_inhabitants}")
         for house in self.houses.values():
             if print_labels:
@@ -117,10 +120,15 @@ class Map:
                     horizontalalignment="center",
                     verticalalignment="center"
                 )
+
             ax.add_patch(
                 Rectangle((house.x, house.y), 3, 3, edgecolor="black", fill=False, lw=1)
             )
         fig.show()
+        if filename is not None:
+            save_figure(fig, filename=filename,
+                        size=(max(self.width * 2 / 3, 15), max(self.height * 2 / 3, 15)),
+                        formats=["png"])
         return fig, ax
 
     # Based on https://stackoverflow.com/a/20528097/16509954
