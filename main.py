@@ -50,3 +50,5 @@ map.print_housemap(tight_layout=True, print_labels=True,
                    filename=folder / out_file.name.split('.')[0])
 print_progression(pops, tight_layout=True)
 
+if __name__ == "__main__":
+    run()
