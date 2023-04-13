@@ -153,11 +153,11 @@ class House:
             self.panorama]
 
     @property
-    def AnnoDesignerIdentifier(self):
+    def annoDesignerIdentifier(self):
         return EngineerSkyscraper(self.level) if self.type == 0 else InvestorSkyscraper(self.level)
 
     @property
-    def AnnoDesignerPosition(self):
+    def annoDesignerPosition(self):
         return f"{self.x, self.y}"
 
     def __repr__(self):

@@ -12,7 +12,7 @@ from matplotlib import colors, pyplot as plt
 from matplotlib.patches import Rectangle
 from tqdm import trange
 
-from anno1800skyscraper.house import House
+from anno1800skyscraper.house import House, InvestorSkyscraper, EngineerSkyscraper
 from utils.figures import open_figure
 
 
@@ -23,8 +23,8 @@ class Map:
         self.coord_map: np.ndarray = np.chararray((self.width, self.height), itemsize=8)
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
-        self.ad_file: str
-        self.file_contents: dict
+        self.ad_file: str = ""
+        self.file_contents: dict = {}
 
     @property
     def house_hashes(self) -> List[str]:
@@ -40,7 +40,7 @@ class Map:
             raise ValueError(f"Coordinates ({x}, {y}) not of unique house")
         if hashes[0] == "":
             return 0
-        return self.house_by_hash(hashes[0])
+        return self.house_by_hash(hashes[0].decode("utf-8"))
 
     def house_by_hash(self, hash) -> House:
         return self.houses.get(hash)
@@ -79,7 +79,7 @@ class Map:
                 print(house)
         print(f"Total inhabitants: {self.total_inhabitants}")
 
-        bounds = [a-0.5 for a in [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6]]
+        bounds = [a - 0.5 for a in [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6]]
         matplotlib.colormaps.unregister("SpectralShrunk")
         cmap = self.shiftedColorMap(matplotlib.colormaps["RdBu"], midpoint=0.4,
                                     name='SpectralShrunk')
@@ -111,8 +111,8 @@ class Map:
         for house in self.houses.values():
             if print_labels:
                 ax.text(
-                    x=house.x+1.5,
-                    y=house.y+1.5,
+                    x=house.x + 1.5,
+                    y=house.y + 1.5,
                     s=("I" if house.type.value else "E") + str(house.level),
                     horizontalalignment="center",
                     verticalalignment="center"
@@ -201,12 +201,13 @@ class Map:
 
     @staticmethod
     def load_from_ad(filename: str | Path | PosixPath) -> Map:
-        with open(filename) as f:
+        with open(filename, "r") as f:
             data: dict = json.load(f)
             houses = []
             for object in data.get("Objects"):
                 idf = object.get("Identifier")
-                if not idf.lower().__contains__("skyscraper"):
+                if not idf in [e.name for e in InvestorSkyscraper] + \
+                       [e.name for e in EngineerSkyscraper]:
                     continue
                 loc_x, loc_y = [int(i) for i in object.get("Position").split(",")]
                 type = 0 if int(idf.split("_SkyScraper_")[1][0]) == 4 else 1
@@ -223,6 +224,14 @@ class Map:
             map.file_contents = data
             return map
 
-    @staticmethod
-    def save_to_ad(file):
-        pass
+    def save_to_ad(self, filename: str | Path | PosixPath):
+        for object in self.file_contents.get("Objects"):
+            idf = object.get("Identifier")
+            if not idf in [e.name for e in InvestorSkyscraper] + \
+                   [e.name for e in EngineerSkyscraper]:
+                continue
+            loc_x, loc_y = [int(i) for i in object.get("Position").split(",")]
+            house = self.house_by_coords(loc_x, loc_y)
+            object["Identifier"] = house.annoDesignerIdentifier.name
+        with open(filename, "w") as file:
+            json.dump(self.file_contents, file)
