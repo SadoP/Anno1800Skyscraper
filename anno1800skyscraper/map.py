@@ -74,62 +74,75 @@ class Map:
         return map, pops
 
     def print_housemap(self, verbose=False, print_labels=False,
-                       filename: str | Path | PosixPath = None, **kwargs) -> (
-            plt.Figure, plt.Axes):
+                       filename: str | Path | PosixPath = None, **kwargs) -> (plt.Figure, plt.Axes):
         if verbose:
             for house in self.houses.values():
                 print(house)
         print(f"Total inhabitants: {self.total_inhabitants}")
 
-        bounds = [a - 0.5 for a in [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6]]
-        matplotlib.colormaps.unregister("SpectralShrunk")
-        cmap = self.shiftedColorMap(matplotlib.colormaps["RdBu"], midpoint=0.4,
-                                    name='SpectralShrunk')
-        norm = colors.BoundaryNorm(bounds, cmap.N)
-
-        fig, ax = open_figure(**kwargs)
         cat_map = self.categorical_coords_map
-        im = ax.imshow((cat_map[:, :, 0] * cat_map[:, :, 1]).T, origin='lower', cmap=cmap,
-                       norm=norm, extent=[0, self.width, 0, self.height])
-        cbar = fig.colorbar(im, ax=ax, cmap=cmap, norm=norm, boundaries=bounds,
-                            ticks=[b + 0.5 for b in bounds], label="Skyscraper Level")
-        ticklabels = cbar.ax.get_ymajorticklabels()
-        newTicklabels = []
-        for ticklabel in ticklabels:
-            tl = ticklabel
-            text = tl._text.replace(u"\u2212", "-")
-            if text[0] == "-":
-                text = text.replace("-", "Engineer Level ")
-            elif text == "0":
-                text = "empty"
+        m = np.abs(cat_map[:, :, 0].astype(float))
+        m[m == 0] = np.nan
+        for i in range(2):
+            if i == 0:
+                bounds = np.arange(-3.5, 6.5, 1)
+                matplotlib.colormaps.unregister("SpectralShrunk")
+                cmap = self.shiftedColorMap(matplotlib.colormaps["RdBu"], midpoint=0.4,
+                                            name='SpectralShrunk')
+                fname = filename.parent / (filename.stem + "_houses")
             else:
-                text = "Investor Level " + text
-            tl._text = text
-            newTicklabels.append(tl)
-        cbar.ax.set_yticklabels(newTicklabels)
-        ax.set_xlim(0, self.width)
-        ax.set_ylim(0, self.height)
-        ax.invert_yaxis()
-        ax.set_title(f"Total inhabitants: {self.total_inhabitants}")
-        for house in self.houses.values():
-            if print_labels:
-                ax.text(
-                    x=house.x + 1.5,
-                    y=house.y + 1.5,
-                    s=("I" if house.type.value else "E") + str(house.level),
-                    horizontalalignment="center",
-                    verticalalignment="center"
-                )
+                bounds = np.arange(-0.5, 6.5, 1)
+                cmap = matplotlib.colormaps["Spectral"]
+                fname = filename.parent / (filename.stem + "_pan")
+            norm = colors.BoundaryNorm(bounds, cmap.N)
+            fig, ax = open_figure(**kwargs)
+            im = ax.imshow((cat_map[:, :, 0] * cat_map[:, :, 1]).T if i == 0 else
+                           (m * cat_map[:, :, 2]).T, origin='lower',
+                           cmap=cmap,
+                           norm=norm,
+                           extent=[0, self.width, 0, self.height])
+            cbar = fig.colorbar(im, ax=ax, cmap=cmap,
+                                norm=norm,
+                                boundaries=bounds,
+                                ticks=bounds+0.5,
+                                label="Skyscraper Level" if i == 0 else "Panorama")
+            if i == 0:
+                ticklabels = cbar.ax.get_ymajorticklabels()
+                newTicklabels = []
+                for ticklabel in ticklabels:
+                    tl = ticklabel
+                    text = tl._text.replace(u"\u2212", "-")
+                    if text[0] == "-":
+                        text = text.replace("-", "Engineer Level ")
+                    elif text == "0":
+                        text = "empty"
+                    else:
+                        text = "Investor Level " + text
+                    tl._text = text
+                    newTicklabels.append(tl)
+                cbar.ax.set_yticklabels(newTicklabels)
+            ax.set_xlim(0, self.width)
+            ax.set_ylim(0, self.height)
+            ax.invert_yaxis()
+            ax.set_title(f"Total inhabitants: {self.total_inhabitants}")
+            for house in self.houses.values():
+                if print_labels:
+                    ax.text(
+                        x=house.x + 1.5,
+                        y=house.y + 1.5,
+                        s=("I" if house.type.value else "E") + str(house.level),
+                        horizontalalignment="center",
+                        verticalalignment="center"
+                    )
 
-            ax.add_patch(
-                Rectangle((house.x, house.y), 3, 3, edgecolor="black", fill=False, lw=1)
-            )
-        fig.show()
-        if filename is not None:
-            save_figure(fig, filename=filename,
-                        size=(max(self.width * 2 / 3, 15), max(self.height * 2 / 3, 15)),
-                        formats=["png"])
-        return fig, ax
+                ax.add_patch(
+                    Rectangle((house.x, house.y), 3, 3, edgecolor="black", fill=False, lw=1)
+                )
+            fig.show()
+            if filename is not None:
+                save_figure(fig, filename=fname,
+                            size=(max(self.width * 2 / 3, 15), max(self.height * 2 / 3, 15)),
+                            formats=["png"])
 
     # Based on https://stackoverflow.com/a/20528097/16509954
     @staticmethod
@@ -187,14 +200,15 @@ class Map:
     @property
     def categorical_coords_map(self):
         vals = np.unique(self.coord_map)
-        new_map = np.zeros((self.width, self.height, 2), dtype=int)
+        new_map = np.zeros((self.width, self.height, 3), dtype=int)
         i = 0
         for v in vals:
             if v == "":
                 continue
             new_map[self.coord_map == v, :] = [
                 1 if self.house_by_hash(v.decode("utf-8")).type.value else -1,
-                self.house_by_hash(v.decode("utf-8")).level
+                self.house_by_hash(v.decode("utf-8")).level,
+                self.house_by_hash(v.decode("utf-8")).panorama
             ]
             i += 1
         return new_map

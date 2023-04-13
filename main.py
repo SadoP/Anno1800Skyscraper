@@ -20,7 +20,6 @@ args = parser.parse_args()
 change = args.change
 change = int(change) if change.isdigit() else float(change)
 folder = Path(args.dir)
-#folder = Path("./layouts/2x2_mixed_mixed")
 epochs = args.epochs
 try:
     in_file = next(folder.glob(f"*.ad"))
