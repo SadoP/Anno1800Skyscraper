@@ -1,29 +1,12 @@
 from __future__ import annotations
 
 import math
-from enum import Enum
 import hashlib
 
 import numpy as np
 
-
-class HousingOptions(Enum):
-    ENGINEER = 0
-    INVESTOR = 1
-
-
-class InvestorSkyscraper(Enum):
-    A7_residence_SkyScraper_5lvl1 = 1
-    A7_residence_SkyScraper_5lvl2 = 2
-    A7_residence_SkyScraper_5lvl3 = 3
-    A7_residence_SkyScraper_5lvl4 = 4
-    A7_residence_SkyScraper_5lvl5 = 5
-
-
-class EngineerSkyscraper(Enum):
-    A7_residence_SkyScraper_4lvl1 = 1
-    A7_residence_SkyScraper_4lvl2 = 2
-    A7_residence_SkyScraper_4lvl3 = 3
+from anno1800skyscraper.const import HousingOptions, EngineerSkyscraper, InvestorSkyscraper, \
+    INVESTORSKYSCRAPERCOLORS, ENGINEERSKYSCRAPERCOLORS
 
 
 class AdjacencyMap:
