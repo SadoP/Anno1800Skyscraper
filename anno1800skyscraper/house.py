@@ -91,7 +91,7 @@ class House:
     def adjacents(self) -> dict[str, House]:
         return {
             house.id: house for house in self.adjacencyMap.adjacents.values() if
-            self.calc_house_distance(self, house) <= self.max_dist_by_level(self.level)
+            self.calc_house_distance(self, house) <= self.radius
         }
 
     @staticmethod
@@ -119,6 +119,10 @@ class House:
             4: 6,
             5: 6.75
         }.get(level)
+
+    @property
+    def radius(self):
+        return self.max_dist_by_level(self.level)
 
     @property
     def inhabitants(self):
