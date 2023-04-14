@@ -1,21 +1,15 @@
 import argparse
-import copy
 from pathlib import Path
 import sys
-
-from tqdm import trange
-import numpy as np
-
-from utils.figures import save_figure, print_progression
-from utils.map import read_map_from_csv, write_map_to_csv
-
+from anno1800skyscraper.map import Map
+from utils.figures import print_progression
 sys.setrecursionlimit(10000)
 parser = argparse.ArgumentParser(
                     prog="Anno1800SkyscraperOptimizer",
                     description="This tool finds the (near) optimal distribution of houses for "
                                 "any given skyscraper layout"
 )
-parser.add_argument("-d", "--dir", default="./layouts/example")
+parser.add_argument("-d", "--dir", default="./layouts/realistic")
 parser.add_argument("-e", "--epochs", default=10000, type=int)
 parser.add_argument("-c", "--change", default=".05")
 args = parser.parse_args()
@@ -25,12 +19,12 @@ change = int(change) if change.isdigit() else float(change)
 folder = Path(args.dir)
 epochs = args.epochs
 try:
-    in_file = next(folder.glob("*_in.csv"))
+    in_file = next(folder.glob(f"*.ad"))
 except StopIteration:
     raise ValueError(f"Input File in {folder} not found")
-out_file = folder / in_file.name.replace("_in", "_out")
+out_file = folder / (in_file.stem + "_out.ad")
 
-map = read_map_from_csv(in_file)
+map = Map.load_from_ad(in_file)
 
 if isinstance(change, int) and change > 0:
     n_change = max(change, 1)
@@ -39,38 +33,16 @@ elif isinstance(change, float) and 0 < change <= 1:
 else:
     raise ValueError("Change has to be given as positive integer or float between 0 and 1")
 
+map.print_housemap(tight_layout=True, print_labels=True,
+                   filename=folder / in_file.name.split('.')[0])
 
-fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
-save_figure(fig, folder / in_file.name.split('.')[0],
-            size=(max(map.width*2/3, 15), max(map.width*2/3, 15)),
-            formats=["png"])
-if not out_file.exists():
-    epoch_range = trange(epochs, unit="epoch")
-    pops = [map.total_inhabitants]
-    for e in epoch_range:
-        map_new = copy.deepcopy(map)
-        house_keys = np.random.choice(list(map_new.houses.keys()), n_change)
-        for key in house_keys:
-            map_new.house_by_hash(key).increment_level() if np.random.random() < .5 else \
-                map_new.house_by_hash(key).decrement_level()
-
-        if map_new.total_inhabitants >= map.total_inhabitants:
-            map = map_new
-        tot = map.total_inhabitants
-        pops.append(tot)
-        epoch_range.set_postfix({"Total": str(tot)})
+if out_file.exists():
+    map = Map.load_from_ad(out_file)
 
 
-    write_map_to_csv(map, out_file)
-    fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
-    save_figure(fig, folder / out_file.name.split('.')[0],
-                size=(max(map.width*2/3, 15), max(map.width*2/3, 15)), formats=["png"])
+map, pops = map.optimize(map, epochs, n_change)
+map.save_to_ad(out_file)
 
-    fig, ax = print_progression(pops, tight_layout=True)
-    save_figure(fig, folder / out_file.name.replace("_out.csv", "_prog"), size=(10, 10),
-                formats=["png"])
-else:
-    map = read_map_from_csv(out_file)
-    fig, _ = map.print_housemap(tight_layout=True, print_labels=True)
-    save_figure(fig, folder / out_file.name.split('.')[0],
-                size=(max(map.width*2/3, 15), max(map.width*2/3, 15)), formats=["png"])
+map.print_housemap(tight_layout=True, print_labels=True,
+                   filename=folder / out_file.name.split('.')[0])
+print_progression(pops, tight_layout=True)

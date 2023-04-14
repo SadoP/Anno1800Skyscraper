@@ -1,15 +1,12 @@
 from __future__ import annotations
 
 import math
-from enum import Enum
 import hashlib
 
 import numpy as np
 
-
-class HousingOptions(Enum):
-    ENGINEER = 0
-    INVESTOR = 1
+from anno1800skyscraper.const import HousingOptions, EngineerSkyscraper, InvestorSkyscraper, \
+    INVESTORSKYSCRAPERCOLORS, ENGINEERSKYSCRAPERCOLORS
 
 
 class AdjacencyMap:
@@ -42,7 +39,9 @@ class AdjacencyMap:
 
 class House:
     def __init__(self, x: int, y: int, level: int, type: int):
-        if x < 0 or y < 0 or not isinstance(x, (int, np.integer)) or not isinstance(y, (int, np.integer)):
+        if x < 0 or y < 0 or \
+                not isinstance(x, (int, np.integer)) or \
+                not isinstance(y, (int, np.integer)):
             raise ValueError(f"X and Y coordinates have to be given as positive integers but were"
                              f"{x} and {y}."
                              "The Coordinate refers to their lower left corner.")
@@ -76,10 +75,10 @@ class House:
         self._level = value
 
     def increment_level(self):
-        self.level = min(self.max_level, self.level+1)
+        self.level = min(self.max_level, self.level + 1)
 
     def decrement_level(self):
-        self.level = max(self.min_level, self.level-1)
+        self.level = max(self.min_level, self.level - 1)
 
     @property
     def panorama(self):
@@ -92,7 +91,7 @@ class House:
     def adjacents(self) -> dict[str, House]:
         return {
             house.id: house for house in self.adjacencyMap.adjacents.values() if
-            self.calc_house_distance(self, house) <= self.max_dist_by_level(self.level)
+            self.calc_house_distance(self, house) <= self.radius
         }
 
     @staticmethod
@@ -122,6 +121,10 @@ class House:
         }.get(level)
 
     @property
+    def radius(self):
+        return self.max_dist_by_level(self.level)
+
+    @property
     def inhabitants(self):
         if self.type.value == 0:
             return self.__eng_inhabitants
@@ -129,11 +132,26 @@ class House:
 
     @property
     def __eng_inhabitants(self):
-        return 60+(self.level-1)*20+self.panorama*20
+        return [136, 171, 196][self.level - 1] + [0, 50, 39, 40, 39, 41][self.panorama]
 
     @property
     def __inv_inhabitants(self):
-        return 75+(self.level-1)*25+self.panorama*25
+        return [197, 239, 283, 331, 381][self.level - 1] + [0, 80, 139, 193, 253, 319][
+            self.panorama]
+
+    @property
+    def annoDesignerIdentifier(self):
+        return EngineerSkyscraper(self.level) if self.type.value == 0 else InvestorSkyscraper(
+            self.level)
+
+    @property
+    def annoDesignerPosition(self):
+        return f"{self.x, self.y}"
+
+    @property
+    def annoDesignerColor(self):
+        return ENGINEERSKYSCRAPERCOLORS.get(self.level) if self.type.value == 0 else \
+            INVESTORSKYSCRAPERCOLORS.get(self.level)
 
     def __repr__(self):
         return f"Level {self.level} {self.type.name} residence {self.id} at location ({self.x}," \
