@@ -12,9 +12,6 @@ parser = argparse.ArgumentParser(
 parser.add_argument("-d", "--dir", default="./layouts/realistic")
 parser.add_argument("-e", "--epochs", default=10000, type=int)
 parser.add_argument("-c", "--change", default=".05")
-parser.add_argument("--mode")
-parser.add_argument("--host")
-parser.add_argument("--port")
 args = parser.parse_args()
 
 change = args.change
@@ -49,6 +46,3 @@ map.save_to_ad(out_file)
 map.print_housemap(tight_layout=True, print_labels=True,
                    filename=folder / out_file.name.split('.')[0])
 print_progression(pops, tight_layout=True)
-
-if __name__ == "__main__":
-    run()
