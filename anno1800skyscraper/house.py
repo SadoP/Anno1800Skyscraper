@@ -148,6 +148,11 @@ class House:
     def annoDesignerPosition(self):
         return f"{self.x, self.y}"
 
+    @property
+    def annoDesignerColor(self):
+        return ENGINEERSKYSCRAPERCOLORS.get(self.level) if self.type.value == 0 else \
+            INVESTORSKYSCRAPERCOLORS.get(self.level)
+
     def __repr__(self):
         return f"Level {self.level} {self.type.name} residence {self.id} at location ({self.x}," \
                f" {self.y}) with {self.panorama} panorama, {self.inhabitants} inhabitants and" \
