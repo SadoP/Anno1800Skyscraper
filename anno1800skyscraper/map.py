@@ -255,5 +255,7 @@ class Map:
             loc_x, loc_y = [int(i) for i in obj.get("Position").split(",")]
             house = self.house_by_coords(loc_x, loc_y)
             obj["Identifier"] = house.annoDesignerIdentifier.name
+            obj["Color"] = house.annoDesignerColor
+            obj["Radius"] = house.radius
         with open(filename, "w") as file:
             json.dump(self.file_contents, file)
