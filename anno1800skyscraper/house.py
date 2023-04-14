@@ -154,7 +154,8 @@ class House:
 
     @property
     def annoDesignerIdentifier(self):
-        return EngineerSkyscraper(self.level) if self.type == 0 else InvestorSkyscraper(self.level)
+        return EngineerSkyscraper(self.level) if self.type.value == 0 else InvestorSkyscraper(
+            self.level)
 
     @property
     def annoDesignerPosition(self):
