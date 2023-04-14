@@ -46,8 +46,9 @@ class Map:
         return self.houses.get(hash)
 
     def add_house(self, house: House) -> None:
-        if house.x + 3 > self.width or house.y + 3 > self.width:
-            raise ValueError("House placement outside of map borders")
+        if house.x + 3 > self.width or house.y + 3 > self.height:
+            raise ValueError(f"House placement outside of map borders. House is at "
+                             f"{house.x, house.y}, map has borders {self.width, self.height}")
         if self.house_exists(house):
             raise ValueError("House already exists")
         if self.house_by_coords(house.x, house.y) != 0:
