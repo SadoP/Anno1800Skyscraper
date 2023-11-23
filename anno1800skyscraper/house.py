@@ -39,10 +39,8 @@ class AdjacencyMap:
 
 class House:
     def __init__(self, x: int, y: int, level: int, type: int):
-        if x < 0 or y < 0 or \
-                not isinstance(x, (int, np.integer)) or \
-                not isinstance(y, (int, np.integer)):
-            raise ValueError(f"X and Y coordinates have to be given as positive integers but were"
+        if not isinstance(x, (int, np.integer)) or not isinstance(y, (int, np.integer)):
+            raise ValueError(f"X and Y coordinates have to be given as integers but were"
                              f"{x} and {y}."
                              "The Coordinate refers to their lower left corner.")
         self.x: int = x

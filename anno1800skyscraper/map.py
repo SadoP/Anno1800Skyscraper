@@ -17,9 +17,11 @@ from utils.figures import open_figure, save_figure
 
 
 class Map:
-    def __init__(self, width: int = 32, height: int = 32):
+    def __init__(self, width: int = 32, height: int = 32, x_offset: int = 0, y_offset: int = 0):
         self.width = width + 2
         self.height = height + 2
+        self.x_offset = x_offset
+        self.y_offset = y_offset
         self.coord_map: np.ndarray = np.chararray((self.width, self.height), itemsize=8)
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
@@ -75,7 +77,7 @@ class Map:
         return map, pops
 
     def print_housemap(self, verbose=False, print_labels=False,
-                       filename: str | Path | PosixPath = None, **kwargs) -> (plt.Figure, plt.Axes):
+                       filename: str | Path | PosixPath = None, **kwargs) -> None:
         if verbose:
             for house in self.houses.values():
                 print(house)
@@ -142,7 +144,8 @@ class Map:
             fig.show()
             if filename is not None:
                 save_figure(fig, filename=fname,
-                            size=(max(self.width * 2 / 3, 15), max(self.height * 2 / 3, 15)),
+                            size=(np.clip(self.width * 2 / 3, 15, 75),
+                                  np.clip(self.height * 2 / 3, 15, 75)),
                             formats=["png"])
 
     # Based on https://stackoverflow.com/a/20528097/16509954
@@ -237,10 +240,15 @@ class Map:
                 level = int(idf.split("_SkyScraper_")[1][-1])
                 house = House(x=loc_x, y=loc_y, level=level, type=type)
                 houses.append(house)
+            x_offset = -min([h.x for h in houses])
+            y_offset = -min([h.y for h in houses])
             width = max([h.x for h in houses]) + 3
             height = max([h.y for h in houses]) + 3
-            map = Map(width=width, height=height)
+            map = Map(width=width+x_offset, height=height+y_offset, x_offset=x_offset,
+                      y_offset=y_offset)
             for house in houses:
+                house.x = house.x + x_offset
+                house.y = house.y + y_offset
                 map.add_house(house)
             map.create_adjacencies()
             map.ad_file = filename
@@ -254,7 +262,7 @@ class Map:
                                                                   EngineerSkyscraper]:
                 continue
             loc_x, loc_y = [int(i) for i in obj.get("Position").split(",")]
-            house = self.house_by_coords(loc_x, loc_y)
+            house = self.house_by_coords(loc_x+self.x_offset, loc_y+self.y_offset)
             obj["Identifier"] = house.annoDesignerIdentifier.name
             obj["Color"] = house.annoDesignerColor
             obj["Radius"] = house.radius
