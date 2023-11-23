@@ -4,15 +4,18 @@ import copy
 import itertools
 import json
 from pathlib import Path, PosixPath
-from typing import List
+from typing import List, Dict, Any, Union, Optional, Tuple
 
 import matplotlib
 import numpy as np
-from matplotlib import colors, pyplot as plt
+from matplotlib import colors
+from matplotlib.colors import LinearSegmentedColormap, Colormap
 from matplotlib.patches import Rectangle
 from tqdm import trange
+from tqdm.std import tqdm
 
-from anno1800skyscraper.house import House, InvestorSkyscraper, EngineerSkyscraper
+from anno1800skyscraper.const import InvestorSkyscraper, EngineerSkyscraper
+from anno1800skyscraper.house import House
 from utils.figures import open_figure, save_figure
 
 
@@ -24,30 +27,35 @@ class Map:
         self.height = height + 2
         self.x_offset = x_offset
         self.y_offset = y_offset
-        self.coord_map: np.ndarray = np.chararray((self.width, self.height), itemsize=8)
+        self.coord_map: np.chararray[Any, np.dtype[np.bytes_]] = np.chararray(
+            (self.width, self.height), itemsize=8
+        )
         self.coord_map[:] = ""
         self.houses: dict[str, House] = {}
-        self.ad_file: str = ""
-        self.file_contents: dict = {}
+        self.ad_file: Union[str, Path, PosixPath] = ""
+        self.file_contents: Dict[Any, Any] = {}
 
     @property
     def house_hashes(self) -> List[str]:
         return list(self.houses.keys())
 
-    def house_exists(self, house) -> bool:
+    def house_exists(self, house: House) -> bool:
         return house.id in self.house_hashes
 
-    def house_by_coords(self, x, y):
+    def house_by_coords(self, x: int, y: int) -> Optional[House]:
         coords = self.coord_map[x : x + 3, y : y + 3].flatten()
         hashes = np.unique(coords)
         if len(hashes) != 1:
             raise ValueError(f"Coordinates ({x}, {y}) not of unique house")
         if hashes[0] == "":
-            return 0
+            return None
         return self.house_by_hash(hashes[0].decode("utf-8"))
 
-    def house_by_hash(self, hash) -> House:
-        return self.houses.get(hash)
+    def house_by_hash(self, hash_str: str) -> House:
+        house: Optional[House] = self.houses.get(hash_str)
+        if not house:
+            raise KeyError
+        return house
 
     def add_house(self, house: House) -> None:
         if house.x + 3 > self.width or house.y + 3 > self.height:
@@ -57,44 +65,44 @@ class Map:
             )
         if self.house_exists(house):
             raise ValueError("House already exists")
-        if self.house_by_coords(house.x, house.y) != 0:
+        if self.house_by_coords(house.x, house.y):
             raise ValueError("Placement for house occupied")
         self.coord_map[house.x : house.x + 3, house.y : house.y + 3] = house.id
         self.houses[house.id] = house
 
     @staticmethod
-    def optimize(map, epochs: int, n_change: int) -> (Map, List[int]):
-        epoch_range = trange(epochs, unit="epoch")
-        pops = [map.total_inhabitants]
+    def optimize(house_map: Map, epochs: int, n_change: int) -> Tuple[Map, List[int]]:
+        epoch_range: tqdm = trange(epochs, unit="epoch")  # type: ignore
+        pops = [house_map.total_inhabitants]
         for _ in epoch_range:
-            map_new = copy.deepcopy(map)
-            house_keys = np.random.choice(list(map_new.houses.keys()), n_change)
+            house_map_new = copy.deepcopy(house_map)
+            house_keys = np.random.choice(list(house_map_new.houses.keys()), n_change)
             for key in house_keys:
-                map_new.house_by_hash(
-                    key
-                ).increment_level() if np.random.random() < 0.5 else map_new.house_by_hash(
-                    key
-                ).decrement_level()
-
-            if map_new.total_inhabitants >= map.total_inhabitants:
-                map = map_new
-            tot = map.total_inhabitants
+                house = house_map_new.house_by_hash(key)
+                if np.random.random() < 0.5:
+                    house.increment_level()
+                else:
+                    house.decrement_level()
+            if house_map_new.total_inhabitants >= house_map.total_inhabitants:
+                house_map = house_map_new
+            tot = house_map.total_inhabitants
             pops.append(tot)
             epoch_range.set_postfix({"Total": str(tot)})
-        return map, pops
+        return house_map, pops
 
     def print_housemap(
         self,
-        verbose=False,
-        print_labels=False,
-        filename: str | Path | PosixPath = None,
-        **kwargs,
+        verbose: bool = False,
+        print_labels: bool = False,
+        filename: Optional[Union[str, Path, PosixPath]] = None,
+        **kwargs: Any,
     ) -> None:
         if verbose:
             for house in self.houses.values():
                 print(house)
+        if not isinstance(filename, Path) and filename is not None:
+            filename = Path(filename)
         print(f"Total inhabitants: {self.total_inhabitants}")
-
         cat_map = self.categorical_coords_map
         m = np.abs(cat_map[:, :, 0].astype(float))
         m[m == 0] = np.nan
@@ -102,14 +110,12 @@ class Map:
             if i == 0:
                 bounds = np.arange(-3.5, 6.5, 1)
                 matplotlib.colormaps.unregister("SpectralShrunk")
-                cmap = self.shiftedColorMap(
+                cmap: Union[LinearSegmentedColormap, Colormap] = self.shiftedColorMap(
                     matplotlib.colormaps["RdBu"], midpoint=0.4, name="SpectralShrunk"
                 )
-                fname = filename.parent / (filename.stem + "_houses")
             else:
                 bounds = np.arange(-0.5, 6.5, 1)
                 cmap = matplotlib.colormaps["Spectral"]
-                fname = filename.parent / (filename.stem + "_pan")
             norm = colors.BoundaryNorm(bounds, cmap.N)
             fig, ax = open_figure(**kwargs)
             im = ax.imshow(
@@ -119,7 +125,7 @@ class Map:
                 origin="lower",
                 cmap=cmap,
                 norm=norm,
-                extent=[0, self.width, 0, self.height],
+                extent=(0, self.width, 0, self.height),
             )
             cbar = fig.colorbar(
                 im,
@@ -135,14 +141,14 @@ class Map:
                 newTicklabels = []
                 for ticklabel in ticklabels:
                     tl = ticklabel
-                    text = tl._text.replace("\u2212", "-")
+                    text = tl.get_text().replace("\u2212", "-")
                     if text[0] == "-":
                         text = text.replace("-", "Engineer Level ")
                     elif text == "0":
                         text = "empty"
                     else:
                         text = "Investor Level " + text
-                    tl._text = text
+                    tl.set_text(text)
                     newTicklabels.append(tl)
                 cbar.ax.set_yticklabels(newTicklabels)
             ax.set_xlim(0, self.width)
@@ -166,6 +172,10 @@ class Map:
                 )
             fig.show()
             if filename is not None:
+                if i == 0:
+                    fname = filename.parent / (filename.stem + "_houses")
+                else:
+                    fname = filename.parent / (filename.stem + "_pan")
                 save_figure(
                     fig,
                     filename=fname,
@@ -178,7 +188,13 @@ class Map:
 
     # Based on https://stackoverflow.com/a/20528097/16509954
     @staticmethod
-    def shiftedColorMap(cmap, start=0, midpoint=0.5, stop=1.0, name="shiftedcmap"):
+    def shiftedColorMap(
+        cmap: Colormap,
+        start: float = 0,
+        midpoint: float = 0.5,
+        stop: float = 1.0,
+        name: str = "shiftedcmap",
+    ) -> LinearSegmentedColormap:
         """
         Function to offset the "center" of a colormap. Useful for
         data with a negative min and positive max and you want the
@@ -200,7 +216,7 @@ class Map:
               Defaults to 1.0 (no upper offset). Should be between
               `midpoint` and 1.0.
         """
-        cdict = {"red": [], "green": [], "blue": [], "alpha": []}
+        cdict = {"red": [], "green": [], "blue": [], "alpha": []}  # type: ignore
 
         # regular index to compute the colors
         reg_index = np.linspace(start, stop, 257)
@@ -221,13 +237,12 @@ class Map:
             cdict["blue"].append((si, b, b))
             cdict["alpha"].append((si, a, a))
 
-        newcmap = matplotlib.colors.LinearSegmentedColormap(name, cdict)
-        plt.register_cmap(cmap=newcmap)
-
+        newcmap = matplotlib.colors.LinearSegmentedColormap(name, cdict)  # type: ignore
+        matplotlib.colormaps.register(cmap=newcmap)
         return newcmap
 
     @property
-    def categorical_coords_map(self):
+    def categorical_coords_map(self) -> np.ndarray[Any, np.dtype[Any]]:
         vals = np.unique(self.coord_map)
         new_map = np.zeros((self.width, self.height, 3), dtype=int)
         i = 0
@@ -243,19 +258,19 @@ class Map:
         return new_map
 
     @property
-    def total_inhabitants(self):
+    def total_inhabitants(self) -> int:
         return sum([h.inhabitants for h in self.houses.values()])
 
-    def create_adjacencies(self):
+    def create_adjacencies(self) -> None:
         for h1, h2 in itertools.product(self.houses.values(), self.houses.values()):
-            h1.adjacencyMap.add_adjacency(h2)
+            h1.adjacency_map.add_adjacency(h2)
 
     @staticmethod
-    def load_from_ad(filename: str | Path | PosixPath) -> Map:
+    def load_from_ad(filename: Union[str, Path, PosixPath]) -> Map:
         with open(filename, "r") as f:
-            data: dict = json.load(f)
+            data: Dict[Any, Any] = json.load(f)
             houses = []
-            for obj in data.get("Objects"):
+            for obj in data.get("Objects"):  # type: ignore
                 idf = obj.get("Identifier")
                 if not idf in [e.name for e in InvestorSkyscraper] + [
                     e.name for e in EngineerSkyscraper
@@ -264,7 +279,7 @@ class Map:
                 loc_x, loc_y = [int(i) for i in obj.get("Position").split(",")]
                 type = 0 if int(idf.split("_SkyScraper_")[1][0]) == 4 else 1
                 level = int(idf.split("_SkyScraper_")[1][-1])
-                house = House(x=loc_x, y=loc_y, level=level, type=type)
+                house = House(x=loc_x, y=loc_y, level=level, house_type=type)
                 houses.append(house)
             x_offset = -min([h.x for h in houses])
             y_offset = -min([h.y for h in houses])
@@ -285,8 +300,8 @@ class Map:
             map.file_contents = data
             return map
 
-    def save_to_ad(self, filename: str | Path | PosixPath):
-        for obj in self.file_contents.get("Objects"):
+    def save_to_ad(self, filename: Union[str, Path, PosixPath]) -> None:
+        for obj in self.file_contents.get("Objects"):  # type: ignore
             idf = obj.get("Identifier")
             if not idf in [e.name for e in InvestorSkyscraper] + [
                 e.name for e in EngineerSkyscraper
@@ -294,6 +309,8 @@ class Map:
                 continue
             loc_x, loc_y = [int(i) for i in obj.get("Position").split(",")]
             house = self.house_by_coords(loc_x + self.x_offset, loc_y + self.y_offset)
+            if not house:
+                raise ValueError("House not found")
             obj["Identifier"] = house.annoDesignerIdentifier.name
             obj["Color"] = house.annoDesignerColor
             obj["Radius"] = house.radius

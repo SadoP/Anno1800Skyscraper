@@ -1,6 +1,7 @@
 import argparse
-from pathlib import Path
 import sys
+from pathlib import Path
+
 from anno1800skyscraper.map import Map
 from utils.figures import print_progression
 
@@ -19,8 +20,9 @@ change = args.change
 change = int(change) if change.isdigit() else float(change)
 folder = Path(args.dir)
 epochs = args.epochs
+
 try:
-    in_file = next(folder.glob(f"*.ad"))
+    in_file = next(folder.glob("*.ad"))
 except StopIteration:
     raise ValueError(f"Input File in {folder} not found")
 out_file = folder / (in_file.stem + "_out.ad")

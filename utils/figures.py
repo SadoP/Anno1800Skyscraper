@@ -1,12 +1,16 @@
 import os
 from pathlib import PosixPath, Path
-from typing import List
+from typing import List, Tuple, Optional, Union, Dict, Any
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 
 
-def open_figure(my_dpi=96, size=800, **kwargs) -> (plt.Figure, plt.Axes):
+def open_figure(
+    my_dpi: float = 96, size: float = 800, **kwargs: Any
+) -> Tuple[Figure, Axes]:
     """
     Opens a new figure
     :param my_dpi: DPI of the figure
@@ -20,12 +24,12 @@ def open_figure(my_dpi=96, size=800, **kwargs) -> (plt.Figure, plt.Axes):
 
 
 def save_figure(
-    fig: plt.figure,
-    filename: str | Path | PosixPath,
-    size: tuple = (30, 30),
-    dpi=600,
-    **kwargs,
-):
+    fig: Figure,
+    filename: Union[str, Path, PosixPath],
+    size: Tuple[int, int] = (30, 30),
+    dpi: float = 600,
+    **kwargs: Any,
+) -> None:
     """
     Saves as figure to file. Creates directory if necessary. Figure size given in cm.
     :param fig: Figure object
@@ -53,8 +57,10 @@ def save_figure(
 
 
 def print_progression(
-    pops: List[int], filename: str | Path | PosixPath = None, **kwargs
-) -> (plt.Figure, plt.Axes):
+    pops: List[int],
+    filename: Optional[Union[str, Path, PosixPath]] = None,
+    **kwargs: Any,
+) -> Tuple[Figure, Axes]:
     fig, ax = open_figure(**kwargs)
     ax.plot(np.arange(0, len(pops)), pops)
     ax.set_xlabel("Epoch")

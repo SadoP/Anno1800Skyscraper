@@ -18,7 +18,7 @@ matplotlib = "^3.7.1"
 tqdm = "^4.65.0"
 black = "^23.11.0"
 mypy = "^1.7.0"
-tqdm-stubs = "^0.2.1"
+types-tqdm = "^4.66.0.4"
 
 [build-system]
 requires = ["poetry-core"]

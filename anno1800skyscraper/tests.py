@@ -3,7 +3,7 @@ from anno1800skyscraper.house import House
 
 
 class TestHouse(unittest.TestCase):
-    def test_comp(self):
+    def test_comp(self) -> None:
         # Comparing same residences
         for residence in [0, 1]:
             for level in range(1, 5):
