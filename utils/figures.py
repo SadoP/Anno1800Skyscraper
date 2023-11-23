@@ -19,8 +19,13 @@ def open_figure(my_dpi=96, size=800, **kwargs) -> (plt.Figure, plt.Axes):
     return fig, axis
 
 
-def save_figure(fig: plt.figure, filename: str | Path | PosixPath, size: tuple = (30, 30),
-                dpi=600, **kwargs):
+def save_figure(
+    fig: plt.figure,
+    filename: str | Path | PosixPath,
+    size: tuple = (30, 30),
+    dpi=600,
+    **kwargs,
+):
     """
     Saves as figure to file. Creates directory if necessary. Figure size given in cm.
     :param fig: Figure object
@@ -47,14 +52,15 @@ def save_figure(fig: plt.figure, filename: str | Path | PosixPath, size: tuple =
     fig.savefig(filename + ".pdf", dpi=dpi, **kwargs)
 
 
-def print_progression(pops: List[int], filename: str | Path | PosixPath = None,
-                      **kwargs) -> (plt.Figure, plt.Axes):
+def print_progression(
+    pops: List[int], filename: str | Path | PosixPath = None, **kwargs
+) -> (plt.Figure, plt.Axes):
     fig, ax = open_figure(**kwargs)
     ax.plot(np.arange(0, len(pops)), pops)
     ax.set_xlabel("Epoch")
     ax.set_ylabel("Total Population")
     ax.set_xlim(0, len(pops) - 1)
-    ax.set_ylim(0, max(pops)*1.1)
+    ax.set_ylim(0, max(pops) * 1.1)
     ax.grid()
     fig.show()
     if filename is not None:

@@ -5,8 +5,13 @@ import hashlib
 
 import numpy as np
 
-from anno1800skyscraper.const import HousingOptions, EngineerSkyscraper, InvestorSkyscraper, \
-    INVESTORSKYSCRAPERCOLORS, ENGINEERSKYSCRAPERCOLORS
+from anno1800skyscraper.const import (
+    HousingOptions,
+    EngineerSkyscraper,
+    InvestorSkyscraper,
+    INVESTORSKYSCRAPERCOLORS,
+    ENGINEERSKYSCRAPERCOLORS,
+)
 
 
 class AdjacencyMap:
@@ -17,9 +22,13 @@ class AdjacencyMap:
     def add_adjacency(self, house: House):
         if house == self.center_house:
             return
-        if math.sqrt(
-                (self.center_house.x - house.x) ** 2 + (self.center_house.y - house.y) ** 2
-        ) > 7:
+        if (
+            math.sqrt(
+                (self.center_house.x - house.x) ** 2
+                + (self.center_house.y - house.y) ** 2
+            )
+            > 7
+        ):
             return
         if self.in_adjacency(house):
             return
@@ -40,9 +49,11 @@ class AdjacencyMap:
 class House:
     def __init__(self, x: int, y: int, level: int, type: int):
         if not isinstance(x, (int, np.integer)) or not isinstance(y, (int, np.integer)):
-            raise ValueError(f"X and Y coordinates have to be given as integers but were"
-                             f"{x} and {y}."
-                             "The Coordinate refers to their lower left corner.")
+            raise ValueError(
+                f"X and Y coordinates have to be given as integers but were"
+                f"{x} and {y}."
+                "The Coordinate refers to their lower left corner."
+            )
         self.x: int = x
         self.y: int = y
         self.type: HousingOptions = HousingOptions(type)
@@ -51,7 +62,7 @@ class House:
 
     @property
     def id(self):
-        return hashlib.sha256(str(id(self)).encode('ASCII')).hexdigest()[:8]
+        return hashlib.sha256(str(id(self)).encode("ASCII")).hexdigest()[:8]
 
     @property
     def level(self):
@@ -67,9 +78,15 @@ class House:
 
     @level.setter
     def level(self, value):
-        if value < 1 or value > self.max_level or not isinstance(value, (int, np.integer)):
-            raise ValueError(f"Level has to be an integer between {self.min_level} and "
-                             f"{self.max_level} but was {value}")
+        if (
+            value < 1
+            or value > self.max_level
+            or not isinstance(value, (int, np.integer))
+        ):
+            raise ValueError(
+                f"Level has to be an integer between {self.min_level} and "
+                f"{self.max_level} but was {value}"
+            )
         self._level = value
 
     def increment_level(self):
@@ -88,8 +105,9 @@ class House:
     @property
     def adjacents(self) -> dict[str, House]:
         return {
-            house.id: house for house in self.adjacencyMap.adjacents.values() if
-            self.calc_house_distance(self, house) <= self.radius
+            house.id: house
+            for house in self.adjacencyMap.adjacents.values()
+            if self.calc_house_distance(self, house) <= self.radius
         }
 
     @staticmethod
@@ -110,13 +128,7 @@ class House:
 
     @staticmethod
     def max_dist_by_level(level: int):
-        return {
-            1: 4,
-            2: 4.25,
-            3: 5,
-            4: 6,
-            5: 6.75
-        }.get(level)
+        return {1: 4, 2: 4.25, 3: 5, 4: 6, 5: 6.75}.get(level)
 
     @property
     def radius(self):
@@ -135,12 +147,16 @@ class House:
     @property
     def __inv_inhabitants(self):
         return [197, 239, 283, 331, 381][self.level - 1] + [0, 80, 139, 193, 253, 319][
-            self.panorama]
+            self.panorama
+        ]
 
     @property
     def annoDesignerIdentifier(self):
-        return EngineerSkyscraper(self.level) if self.type.value == 0 else InvestorSkyscraper(
-            self.level)
+        return (
+            EngineerSkyscraper(self.level)
+            if self.type.value == 0
+            else InvestorSkyscraper(self.level)
+        )
 
     @property
     def annoDesignerPosition(self):
@@ -148,10 +164,15 @@ class House:
 
     @property
     def annoDesignerColor(self):
-        return ENGINEERSKYSCRAPERCOLORS.get(self.level) if self.type.value == 0 else \
-            INVESTORSKYSCRAPERCOLORS.get(self.level)
+        return (
+            ENGINEERSKYSCRAPERCOLORS.get(self.level)
+            if self.type.value == 0
+            else INVESTORSKYSCRAPERCOLORS.get(self.level)
+        )
 
     def __repr__(self):
-        return f"Level {self.level} {self.type.name} residence {self.id} at location ({self.x}," \
-               f" {self.y}) with {self.panorama} panorama, {self.inhabitants} inhabitants and" \
-               f" {len(self.adjacents)} adjacencies"
+        return (
+            f"Level {self.level} {self.type.name} residence {self.id} at location ({self.x},"
+            f" {self.y}) with {self.panorama} panorama, {self.inhabitants} inhabitants and"
+            f" {len(self.adjacents)} adjacencies"
+        )

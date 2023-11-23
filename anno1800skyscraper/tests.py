@@ -21,4 +21,3 @@ class TestHouse(unittest.TestCase):
             house_INV = House(0, 0, level, 1)
             assert House.compare_house_levels(house_ENG, house_INV) == 1
             assert House.compare_house_levels(house_INV, house_ENG) == 1
-
