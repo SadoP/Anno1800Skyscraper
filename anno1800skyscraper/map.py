@@ -27,7 +27,7 @@ class Map:
         self.height = height + 2
         self.x_offset = x_offset
         self.y_offset = y_offset
-        self.coord_map: np.chararray[Any, np.dtype[np.bytes_]] = np.chararray(
+        self.coord_map: np.ndarray[Any, np.dtype[np.bytes_]] = np.char.chararray(
             (self.width, self.height), itemsize=8
         )
         self.coord_map[:] = ""
@@ -47,9 +47,9 @@ class Map:
         hashes = np.unique(coords)
         if len(hashes) != 1:
             raise ValueError(f"Coordinates ({x}, {y}) not of unique house")
-        if hashes[0] == "":
+        if not hashes[0]:
             return None
-        return self.house_by_hash(hashes[0].decode("utf-8"))
+        return self.house_by_hash(hashes[0])
 
     def house_by_hash(self, hash_str: str) -> House:
         house: Optional[House] = self.houses.get(hash_str)
@@ -119,9 +119,11 @@ class Map:
             norm = colors.BoundaryNorm(bounds, cmap.N)
             fig, ax = open_figure(**kwargs)
             im = ax.imshow(
-                (cat_map[:, :, 0] * cat_map[:, :, 1]).T
-                if i == 0
-                else (m * cat_map[:, :, 2]).T,
+                (
+                    (cat_map[:, :, 0] * cat_map[:, :, 1]).T
+                    if i == 0
+                    else (m * cat_map[:, :, 2]).T
+                ),
                 origin="lower",
                 cmap=cmap,
                 norm=norm,
@@ -247,12 +249,13 @@ class Map:
         new_map = np.zeros((self.width, self.height, 3), dtype=int)
         i = 0
         for v in vals:
-            if v == "":
+            if not v:
                 continue
+            house = self.house_by_hash(v.decode())
             new_map[self.coord_map == v, :] = [
-                1 if self.house_by_hash(v.decode("utf-8")).type.value else -1,
-                self.house_by_hash(v.decode("utf-8")).level,
-                self.house_by_hash(v.decode("utf-8")).panorama,
+                1 if house.type.value else -1,
+                house.level,
+                house.panorama,
             ]
             i += 1
         return new_map
