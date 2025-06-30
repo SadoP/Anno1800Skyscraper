@@ -125,7 +125,7 @@ class House:
 
     @staticmethod
     def calc_house_distance(own: House, other: House) -> float:
-        return math.sqrt((own.x - other.x) ** 2 + (other.y - other.y) ** 2)
+        return math.sqrt((own.x - other.x) ** 2 + (own.y - other.y) ** 2)
 
     @staticmethod
     def max_dist_by_level(level: int) -> float:

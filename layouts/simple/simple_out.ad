@@ -26,7 +26,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl5",
+      "Identifier": "A7_residence_SkyScraper_5lvl4",
       "Label": "",
       "Position": "2,5",
       "Size": "3,3",
@@ -34,13 +34,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 161,
-        "G": 234,
-        "B": 234
+        "R": 105,
+        "G": 196,
+        "B": 196
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 6.75,
+      "Radius": 6,
       "InfluenceRange": -2,
       "PavedStreet": false,
       "BlockedAreaLength": 0,
@@ -136,7 +136,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl4",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "5,5",
       "Size": "3,3",
@@ -144,13 +144,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 105,
-        "G": 196,
-        "B": 196
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 6,
+      "Radius": 6.75,
       "InfluenceRange": -2,
       "PavedStreet": false,
       "BlockedAreaLength": 0,

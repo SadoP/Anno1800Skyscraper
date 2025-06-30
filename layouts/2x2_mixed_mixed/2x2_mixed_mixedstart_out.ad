@@ -686,7 +686,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "44,5",
       "Size": "3,3",
@@ -694,13 +694,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -840,7 +840,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl1",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "44,2",
       "Size": "3,3",
@@ -848,13 +848,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 97,
-        "G": 118,
-        "B": 136
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -1170,7 +1170,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "37,5",
       "Size": "3,3",
@@ -1178,13 +1178,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -1192,7 +1192,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl1",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "33,5",
       "Size": "3,3",
@@ -1200,13 +1200,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 3,
-        "G": 94,
-        "B": 94
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -1236,7 +1236,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "37,2",
       "Size": "3,3",
@@ -1244,13 +1244,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -1522,7 +1522,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "40,9",
       "Size": "3,3",
@@ -1530,13 +1530,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -1632,7 +1632,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl5",
+      "Identifier": "A7_residence_SkyScraper_5lvl3",
       "Label": "",
       "Position": "44,12",
       "Size": "3,3",
@@ -1640,13 +1640,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 161,
-        "G": 234,
-        "B": 234
+        "R": 68,
+        "G": 166,
+        "B": 166
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 6.75,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -1984,7 +1984,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl1",
+      "Identifier": "A7_residence_SkyScraper_4lvl2",
       "Label": "",
       "Position": "37,9",
       "Size": "3,3",
@@ -1992,13 +1992,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 97,
-        "G": 118,
-        "B": 136
+        "R": 144,
+        "G": 165,
+        "B": 183
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 4.25,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -2380,7 +2380,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "33,12",
       "Size": "3,3",
@@ -2388,13 +2388,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -2842,7 +2842,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "44,16",
       "Size": "3,3",
@@ -2850,13 +2850,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -2952,7 +2952,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl3",
+      "Identifier": "A7_residence_SkyScraper_4lvl2",
       "Label": "",
       "Position": "40,16",
       "Size": "3,3",
@@ -2960,13 +2960,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 169,
-        "G": 195,
-        "B": 237
+        "R": 144,
+        "G": 165,
+        "B": 183
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 4.25,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -3238,7 +3238,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "40,19",
       "Size": "3,3",
@@ -3246,13 +3246,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -3634,7 +3634,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "33,19",
       "Size": "3,3",
@@ -3642,13 +3642,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -4470,7 +4470,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "40,23",
       "Size": "3,3",
@@ -4478,13 +4478,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -4492,7 +4492,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "33,23",
       "Size": "3,3",
@@ -4500,13 +4500,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -4558,7 +4558,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "47,9",
       "Size": "3,3",
@@ -4566,13 +4566,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -4602,7 +4602,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl3",
+      "Identifier": "A7_residence_SkyScraper_4lvl2",
       "Label": "",
       "Position": "47,16",
       "Size": "3,3",
@@ -4610,13 +4610,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 169,
-        "G": 195,
-        "B": 237
+        "R": 144,
+        "G": 165,
+        "B": 183
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 4.25,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -4646,7 +4646,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "47,23",
       "Size": "3,3",
@@ -4654,13 +4654,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -4998,7 +4998,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl1",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "26,2",
       "Size": "3,3",
@@ -5006,13 +5006,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 97,
-        "G": 118,
-        "B": 136
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -5350,7 +5350,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl1",
+      "Identifier": "A7_residence_SkyScraper_5lvl3",
       "Label": "",
       "Position": "16,5",
       "Size": "3,3",
@@ -5358,13 +5358,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 3,
-        "G": 94,
-        "B": 94
+        "R": 68,
+        "G": 166,
+        "B": 166
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -5922,7 +5922,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "26,9",
       "Size": "3,3",
@@ -5930,13 +5930,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -5944,7 +5944,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl5",
+      "Identifier": "A7_residence_SkyScraper_5lvl3",
       "Label": "",
       "Position": "26,12",
       "Size": "3,3",
@@ -5952,13 +5952,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 161,
-        "G": 234,
-        "B": 234
+        "R": 68,
+        "G": 166,
+        "B": 166
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 6.75,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -6208,7 +6208,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "16,9",
       "Size": "3,3",
@@ -6216,13 +6216,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -6472,7 +6472,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "16,12",
       "Size": "3,3",
@@ -6480,13 +6480,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -6494,7 +6494,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl3",
+      "Identifier": "A7_residence_SkyScraper_4lvl2",
       "Label": "",
       "Position": "19,9",
       "Size": "3,3",
@@ -6502,13 +6502,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 169,
-        "G": 195,
-        "B": 237
+        "R": 144,
+        "G": 165,
+        "B": 183
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 4.25,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -6538,7 +6538,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl5",
+      "Identifier": "A7_residence_SkyScraper_5lvl3",
       "Label": "",
       "Position": "23,5",
       "Size": "3,3",
@@ -6546,13 +6546,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 161,
-        "G": 234,
-        "B": 234
+        "R": 68,
+        "G": 166,
+        "B": 166
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 6.75,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -6604,7 +6604,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "23,9",
       "Size": "3,3",
@@ -6612,13 +6612,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -6978,7 +6978,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl3",
       "Label": "",
       "Position": "12,5",
       "Size": "3,3",
@@ -6986,13 +6986,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 68,
+        "G": 166,
+        "B": 166
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7088,7 +7088,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "9,5",
       "Size": "3,3",
@@ -7096,13 +7096,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7110,7 +7110,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "9,2",
       "Size": "3,3",
@@ -7118,13 +7118,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7132,7 +7132,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "12,2",
       "Size": "3,3",
@@ -7140,13 +7140,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7352,7 +7352,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "5,5",
       "Size": "3,3",
@@ -7360,13 +7360,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7462,7 +7462,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "2,2",
       "Size": "3,3",
@@ -7470,13 +7470,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7506,7 +7506,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "2,5",
       "Size": "3,3",
@@ -7514,13 +7514,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -7858,7 +7858,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "9,9",
       "Size": "3,3",
@@ -7866,13 +7866,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -8562,7 +8562,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "5,12",
       "Size": "3,3",
@@ -8570,13 +8570,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -8716,7 +8716,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "2,9",
       "Size": "3,3",
@@ -8724,13 +8724,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -9112,7 +9112,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "26,19",
       "Size": "3,3",
@@ -9120,13 +9120,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -9508,7 +9508,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "19,19",
       "Size": "3,3",
@@ -9516,13 +9516,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -10300,7 +10300,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "23,19",
       "Size": "3,3",
@@ -10308,13 +10308,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -10388,7 +10388,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "19,23",
       "Size": "3,3",
@@ -10396,13 +10396,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -10630,7 +10630,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl1",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "9,16",
       "Size": "3,3",
@@ -10638,13 +10638,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 97,
-        "G": 118,
-        "B": 136
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -10982,7 +10982,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "12,19",
       "Size": "3,3",
@@ -10990,13 +10990,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -11004,7 +11004,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl1",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "5,16",
       "Size": "3,3",
@@ -11012,13 +11012,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 97,
-        "G": 118,
-        "B": 136
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -11334,7 +11334,7 @@
       "Direction": "Right"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "2,16",
       "Size": "3,3",
@@ -11342,13 +11342,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -11378,7 +11378,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "5,19",
       "Size": "3,3",
@@ -11386,13 +11386,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -12302,7 +12302,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "12,23",
       "Size": "3,3",
@@ -12310,13 +12310,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -14458,7 +14458,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "30,2",
       "Size": "3,3",
@@ -14466,13 +14466,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -14480,7 +14480,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl2",
+      "Identifier": "A7_residence_SkyScraper_5lvl3",
       "Label": "",
       "Position": "30,5",
       "Size": "3,3",
@@ -14488,13 +14488,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 0,
-        "G": 128,
-        "B": 128
+        "R": 68,
+        "G": 166,
+        "B": 166
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -14568,7 +14568,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_5lvl3",
+      "Identifier": "A7_residence_SkyScraper_5lvl5",
       "Label": "",
       "Position": "30,19",
       "Size": "3,3",
@@ -14576,13 +14576,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 68,
-        "G": 166,
-        "B": 166
+        "R": 161,
+        "G": 234,
+        "B": 234
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 5,
+      "Radius": 6.75,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -14678,7 +14678,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "44,30",
       "Size": "3,3",
@@ -14686,13 +14686,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -14788,7 +14788,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "26,30",
       "Size": "3,3",
@@ -14796,13 +14796,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,
@@ -14898,7 +14898,7 @@
       "Direction": "Up"
     },
     {
-      "Identifier": "A7_residence_SkyScraper_4lvl2",
+      "Identifier": "A7_residence_SkyScraper_4lvl3",
       "Label": "",
       "Position": "2,30",
       "Size": "3,3",
@@ -14906,13 +14906,13 @@
       "Template": "SkyScraper_Residence",
       "Color": {
         "A": 255,
-        "R": 144,
-        "G": 165,
-        "B": 183
+        "R": 169,
+        "G": 195,
+        "B": 237
       },
       "Borderless": false,
       "Road": false,
-      "Radius": 4.25,
+      "Radius": 5,
       "InfluenceRange": -2.0,
       "PavedStreet": false,
       "BlockedAreaLength": 0.0,

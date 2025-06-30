@@ -46,5 +46,5 @@ If you have problems installing poetry, follow the installation instructions her
    - change (c): The amount of houses to flip. Can be int for absolute values or float for relative values. This number varies depending on the size and shape of your layout. There's nothing but trying different values to find the best one, but lower values tend to work better in my experience.
  
    ```bash
-    python python main.py -d ./layouts/realistic -e 20000 -c .05
+    python main.py -d ./layouts/realistic -e 20000 -c .05
    ```
